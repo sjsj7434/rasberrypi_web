@@ -1,13 +1,14 @@
 package com.lsj.domain;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class RasberryVO {
 
 	private float temp;
 	private float hud;
 	private String id;
-	private Date time;
+	private Timestamp time;
 	private boolean isOn;
 	
 	public String getId() {
@@ -16,10 +17,10 @@ public class RasberryVO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Date getTime() {
+	public Timestamp getTime() {
 		return time;
 	}
-	public void setTime(Date time) {
+	public void setTime(Timestamp time) {
 		this.time = time;
 	}
 	public boolean isOn() {
