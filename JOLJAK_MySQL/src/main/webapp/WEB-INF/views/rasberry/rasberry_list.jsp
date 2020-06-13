@@ -10,6 +10,9 @@
 	<script src="https://code.jquery.com/jquery.min.js"></script><!-- jQuery -->
 </head>
 <body>
+
+			<c:if test="${member != null}"><a class="nav-link" href="logout">로그아웃</a>환풍기 접속중</c:if>
+			<c:if test="${member == null}"><a class="nav-link" href="/study">로그인</a></c:if>
 	<div align=center>
 		<header>온도 습도 실시간 그래프</header><br>
 		

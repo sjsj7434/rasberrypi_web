@@ -11,6 +11,7 @@ public class RasberryVO {
 	private Timestamp time;
 	private boolean isOn;
 	
+	
 	public String getId() {
 		return id;
 	}
