@@ -18,9 +18,9 @@ public class RasberryDAOImpl implements RasberryDAO {
 	private static final String namespace = "com.lsj.mapper.RasberryMapper";
 	
 	public List<RasberryVO> readList() throws Exception {
-		List<RasberryVO> studentlist = new ArrayList<RasberryVO>();
-		studentlist = sqlSession.selectList(namespace + ".selectAll");
-		return studentlist;
+		List<RasberryVO> rasberrylist = new ArrayList<RasberryVO>();
+		rasberrylist = sqlSession.selectList(namespace + ".selectAll");
+		return rasberrylist;
 	}
 	
 }

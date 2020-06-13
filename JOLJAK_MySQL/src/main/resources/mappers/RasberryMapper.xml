@@ -8,6 +8,6 @@
 	 	
 	<select id="selectAll" resultType="com.lsj.domain.RasberryVO">
 		select * from temp_hud
-	</select>	
+	</select>
      
 </mapper>  

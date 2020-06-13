@@ -1,6 +1,5 @@
 package com.lsj.controller;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lsj.domain.RasberryVO;
 import com.lsj.service.RasberryService;
-import com.mysql.cj.xdevapi.JsonArray;
-import com.mysql.cj.xdevapi.JsonValue;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.groovy.GJson;
 
 /**
  * Handles requests for the application home page.
@@ -45,7 +40,6 @@ public class MainController {
 		}
         
         model.addAttribute("jsonList", jsonArray);
-        
         model.addAttribute("temp", temp);
         
         return "rasberry/rasberry_list";
