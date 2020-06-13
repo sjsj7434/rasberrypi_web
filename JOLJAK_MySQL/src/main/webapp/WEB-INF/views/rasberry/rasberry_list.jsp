@@ -44,7 +44,7 @@
 		
 		<script>
 			var chartDrowFun = {
-		
+		//재미있는 테스트
 				chartDrow : function() {
 					var chartData = '';
 		
