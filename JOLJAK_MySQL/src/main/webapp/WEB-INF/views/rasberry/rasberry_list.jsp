@@ -60,7 +60,7 @@
 							
 					        console.log(test[ele].time);//test[ele].time.getYear()
 					        dataRow = [ new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes() ), test[ele].temp, test[ele].hud ];
-							data.addRow(dataRow);
+							data.addRow(dataRow); 
 					    }
 		
 						var chart = new google.visualization.ChartWrapper({
