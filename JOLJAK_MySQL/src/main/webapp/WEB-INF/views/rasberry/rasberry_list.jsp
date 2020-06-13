@@ -8,6 +8,11 @@
 	<title>Student List</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script><!-- google charts -->
 	<script src="https://code.jquery.com/jquery.min.js"></script><!-- jQuery -->
+	
+	<script src="resources/jquery.js"></script>
+	<script src="resources/jquery-ui.js"></script>
+	<link href="resources/jquery-ui.css" rel="stylesheet">
+
 </head>
 <body>
 
@@ -15,6 +20,23 @@
 			<c:if test="${member == null}"><a class="nav-link" href="/study">로그인</a></c:if>
 	<div align=center>
 		<header>온도 습도 실시간 그래프</header><br>
+		
+		<div>
+			<!-- Datepicker -->
+			<h2 class="demoHeaders">Datepicker</h2>
+			<div id="datepicker"></div>
+			<input type="button" value="조회" onclick="test()">
+			
+			<script type="text/javascript">
+				$( "#datepicker" ).datepicker({
+					inline: true
+				});
+
+				function test(){
+					alert($( "#datepicker" ).datepicker( "getDate" ));
+				}
+			</script>
+		</div>
 		
 		<div id="Line_Controls_Chart">
 			<!-- 라인 차트 생성할 영역 -->
@@ -25,12 +47,12 @@
 		
 		<script>
 			var chartDrowFun = {
-		
+		//재미있는 테스트
 				chartDrow : function() {
 					var chartData = '';
 		
 					//날짜형식 변경하고 싶으시면 이 부분 수정하세요.
-					var chartDateformat = 'yyyy년MM월dd일';
+					var chartDateformat = 'yyyy년 MM월 dd일 hh시 mm분';
 					//라인차트의 라인 수
 					var chartLineCount = 10;
 					//컨트롤러 바 차트의 라인 수
@@ -47,6 +69,7 @@
 						//그래프에 표시할 데이터
 						var dataRow = [];
 						var test = ${jsonList};
+						var now = $( "#datepicker" ).datepicker( "getDate" );
 						console.log(test);
 						console.log(${jsonList[0].hud});
 						console.log(Object.keys(${jsonList}).length);
@@ -55,14 +78,18 @@
 							var date = new Date();
 							var timestamp = test[ele].time.time;
 							var date = new Date(timestamp);
+
+							console.log(date);
+							console.log(now);
 							console.log('year is ' + date.getFullYear());
 							console.log('month is ' + date.getMonth());
 							console.log('day is ' + date.getDate());
-							console.log('hour is ' + date.getHours());
+							console.log('hour is ' + (date.getHours() - 9));
 							console.log('minute is ' + date.getMinutes());
 							
 					        console.log(test[ele].time);//test[ele].time.getYear()
-					        dataRow = [ new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes() ), test[ele].temp, test[ele].hud ];
+					        dataRow = [ new Date(date.getFullYear(), date.getMonth(), date.getDate(), (date.getHours() - 9), date.getMinutes() ), 
+						        test[ele].temp, test[ele].hud ];
 							data.addRow(dataRow); 
 					    }
 		

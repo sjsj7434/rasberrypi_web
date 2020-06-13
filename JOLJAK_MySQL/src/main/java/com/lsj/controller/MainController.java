@@ -100,6 +100,8 @@ public class MainController {
 	        
 	        return "rasberry/rasberry_list";
 		}
+
+        
     }
 	
 	@RequestMapping(value = {"/googleChart"}, method = RequestMethod.GET)
