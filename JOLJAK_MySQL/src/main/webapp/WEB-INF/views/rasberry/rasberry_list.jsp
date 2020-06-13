@@ -38,9 +38,8 @@
 						var data = new google.visualization.DataTable();
 						//그래프에 표시할 컬럼 추가
 						data.addColumn('datetime', '날짜');
-						data.addColumn('number', '남성');
-						data.addColumn('number', '여성');
-						data.addColumn('number', '전체');
+						data.addColumn('number', '온도');
+						data.addColumn('number', '습도');
 		
 						//그래프에 표시할 데이터
 						var dataRow = [];
@@ -50,8 +49,17 @@
 						console.log(Object.keys(${jsonList}).length);
 
 						for(var ele in test){
-					        console.log(test[ele].temp);
-					        dataRow = [ new Date('2017', '09', ele, '10'), test[ele].temp, test[ele].hud, 10 ];
+							var date = new Date();
+							var timestamp = test[ele].time.time;
+							var date = new Date(timestamp);
+							console.log('year is ' + date.getFullYear());
+							console.log('month is ' + date.getMonth());
+							console.log('day is ' + date.getDate());
+							console.log('hour is ' + date.getHours());
+							console.log('minute is ' + date.getMinutes());
+							
+					        console.log(test[ele].time);//test[ele].time.getYear()
+					        dataRow = [ new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes() ), test[ele].temp, test[ele].hud ];
 							data.addRow(dataRow);
 					    }
 		
