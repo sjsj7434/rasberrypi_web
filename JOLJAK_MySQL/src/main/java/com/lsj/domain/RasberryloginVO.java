@@ -1,8 +1,5 @@
 package com.lsj.domain;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-
 public class RasberryloginVO {
 
 	private String serialnumber;

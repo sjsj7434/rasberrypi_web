@@ -16,7 +16,6 @@
 		  FROM rasberry
 		 WHERE serialnumber = #{serialnumber}
 		 AND passwd = #{passwd}   
-		 
 	</select>
 	
 </mapper>  

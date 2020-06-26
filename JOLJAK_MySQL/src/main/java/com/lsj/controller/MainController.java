@@ -1,6 +1,5 @@
 package com.lsj.controller;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,12 +18,9 @@ import com.lsj.domain.RasberryVO;
 import com.lsj.domain.RasberryloginVO;
 import com.lsj.service.RasberryService;
 import com.lsj.service.RasberryloginService;
-import com.mysql.cj.xdevapi.JsonArray;
-import com.mysql.cj.xdevapi.JsonValue;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.groovy.GJson;
 
 /**
  * Handles requests for the application home page.
@@ -90,11 +86,13 @@ public class MainController {
 	        JSONObject jsonObject = new JSONObject();
 	        
 	        for (int i = 0; i < temp.size(); i++) {			
-				jsonObject.put("temp", temp.get(i).getTemp());
-				jsonObject.put("hud", temp.get(i).getHud());
-				jsonObject.put("id", temp.get(i).getId());
+	        	jsonObject.put("temp_in", temp.get(i).getTemp_in());
+				jsonObject.put("hud_in", temp.get(i).getHud_in());
+				jsonObject.put("temp_out", temp.get(i).getTemp_out());
+				jsonObject.put("hud_out", temp.get(i).getHud_out());
+				jsonObject.put("id", temp.get(i).getSerialNumber());
 				jsonObject.put("time", temp.get(i).getTime());
-				jsonObject.put("isOn", temp.get(i).isOn());
+				jsonObject.put("isOn", temp.get(i).getIsOn());
 				
 				jsonArray.add(jsonObject);
 			}
@@ -109,6 +107,11 @@ public class MainController {
 	@RequestMapping(value = {"/googleChart"}, method = RequestMethod.GET)
     public String googleChart(Model model) throws Exception {
         return "rasberry/googleChart";
+    }
+	
+	@RequestMapping(value = {"/index"}, method = RequestMethod.GET)
+    public String index(Model model) throws Exception {
+        return "rasberry/index";
     }
 	
 }
