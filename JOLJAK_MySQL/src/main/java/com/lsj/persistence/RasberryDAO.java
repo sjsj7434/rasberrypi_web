@@ -6,6 +6,6 @@ import com.lsj.domain.RasberryVO;
 
 public interface RasberryDAO {
 
-	public List<RasberryVO> readList() throws Exception;
+	public List<RasberryVO> readList(RasberryVO vo) throws Exception;
 	
 }

@@ -11,6 +11,7 @@ public class RasberryVO {
 	private String serialNumber;
 	private Timestamp time;
 	private int isOn;
+	private String datePicker;
 
 	public float getTemp_in() {
 		return temp_in;
@@ -66,6 +67,14 @@ public class RasberryVO {
 
 	public void setIsOn(int isOn) {
 		this.isOn = isOn;
+	}
+
+	public String getDatePicker() {
+		return datePicker;
+	}
+
+	public void setDatePicker(String datePicker) {
+		this.datePicker = datePicker;
 	}
 
 }

@@ -7,15 +7,20 @@
 <mapper namespace="com.lsj.mapper.RasberryMapper">
 	 	
 	<select id="selectAll" resultType="com.lsj.domain.RasberryVO">
-		select * from temp_hud ORDER BY time DESC
-	</select>	
-    
+		SELECT * FROM temp_hud ORDER BY time DESC
+	</select>
+	
+	<select id="selectByDate" resultType="com.lsj.domain.RasberryVO">
+		SELECT * FROM temp_hud
+		WHERE date_format(time, '%Y-%m-%d') = #{datePicker}
+		ORDER BY time DESC
+	</select>
     
     <select id="login" resultType="com.lsj.domain.RasberryloginVO">
 		SELECT serialnumber, passwd
-		  FROM rasberry
-		 WHERE serialnumber = #{serialnumber}
-		 AND passwd = #{passwd}   
+		FROM rasberry
+		WHERE serialnumber = #{serialnumber}
+		AND passwd = #{passwd}
 	</select>
 	
 </mapper>  

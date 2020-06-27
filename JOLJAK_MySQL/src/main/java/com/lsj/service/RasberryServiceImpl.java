@@ -13,8 +13,8 @@ public class RasberryServiceImpl implements RasberryService {
 	@Autowired
 	private RasberryDAO memberDAO;
 	
-	public List<RasberryVO> readRasberryList() throws Exception{
-		return memberDAO.readList();
+	public List<RasberryVO> readRasberryList(RasberryVO vo) throws Exception{
+		return memberDAO.readList(vo);
 	}
 	
 }

@@ -1,15 +1,10 @@
 package com.lsj.persistence;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
-
-import com.lsj.domain.RasberryVO;
-import com.lsj.domain.RasberryloginVO;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.lsj.domain.RasberryloginVO;
 
 @Repository
 public class RasberryloginDAOimpl implements RasberryloginDAO {
