@@ -131,7 +131,9 @@
 											</div>
 										</div>
 										<div class="col-auto">
-											<i class="fas fa-calendar fa-2x text-gray-300" onclick="datePick()" style="cursor: pointer"></i>
+											<a href="#" class="btn btn-success btn-circle" onclick="datePick()">
+	                    						<i class="fas fa-check"></i>
+	                 						</a>
 											<script type="text/javascript">
 												function datePick() {
 													if($('#datePicker').val() == ''){
