@@ -83,6 +83,7 @@ public class MainController {
 			String timeNow = format.format(time);
 			
 			vo.setDatePicker(timeNow);
+			vo.setSerialNumber(loginVO.getSerialnumber());
 			
 			List<RasberryVO> temp = rasberryService.readRasberryList(vo);
 	    	
@@ -133,6 +134,7 @@ public class MainController {
 			 return "redirect:/";
 		}
 		else {
+			vo.setSerialNumber(loginVO.getSerialnumber());
 			List<RasberryVO> temp = rasberryService.readRasberryList(vo);
 	    	
 	        JSONArray jsonArray = new JSONArray();

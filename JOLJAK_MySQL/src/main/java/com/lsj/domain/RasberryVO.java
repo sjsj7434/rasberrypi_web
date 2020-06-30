@@ -8,7 +8,7 @@ public class RasberryVO {
 	private float hud_in;
 	private float temp_out;
 	private float hud_out;
-	private String serialNumber;
+	private String serialnumber;
 	private Timestamp time;
 	private int isOn;
 	private String datePicker;
@@ -46,11 +46,11 @@ public class RasberryVO {
 	}
 
 	public String getSerialNumber() {
-		return serialNumber;
+		return serialnumber;
 	}
 
-	public void setSerialNumber(String serialNumber) {
-		this.serialNumber = serialNumber;
+	public void setSerialNumber(String serialnumber) {
+		this.serialnumber = serialnumber;
 	}
 
 	public Timestamp getTime() {
