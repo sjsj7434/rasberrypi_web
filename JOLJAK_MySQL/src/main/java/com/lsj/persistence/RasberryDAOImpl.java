@@ -15,12 +15,17 @@ public class RasberryDAOImpl implements RasberryDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private static final String namespace = "com.lsj.mapper.RasberryMapper";
+	private static final String namespace = "com.lsj.mapper.RasberryMapper.";
 	
 	public List<RasberryVO> readList(RasberryVO vo) throws Exception {
 		List<RasberryVO> studentlist = new ArrayList<RasberryVO>();
-		studentlist = sqlSession.selectList(namespace + ".selectByDate", vo);
+		studentlist = sqlSession.selectList(namespace + "selectByDate", vo);
 		return studentlist;
+	}
+
+	@Override
+	public RasberryVO readInfo() throws Exception {
+		return sqlSession.selectOne(namespace + "selectForInfo");
 	}
 	
 }

@@ -46,6 +46,16 @@ public class MainController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value = "info", method = RequestMethod.GET)
+	public String crawling(Model model) throws Exception{
+		
+		RasberryVO info = rasberryService.readRasberryInfo();
+		
+		model.addAttribute("info", info.getIsOn());
+		
+		return "rasberry/info";
+	}
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String login() {
 		return "rasberry/login";
@@ -78,7 +88,7 @@ public class MainController {
 			 return "redirect:/";
 		}
 		else {
-			SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd");
+			SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 			Date time = new Date();
 			String timeNow = format.format(time);
 			

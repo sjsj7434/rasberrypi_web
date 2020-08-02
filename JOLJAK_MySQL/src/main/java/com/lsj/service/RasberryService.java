@@ -7,5 +7,6 @@ import com.lsj.domain.RasberryVO;
 public interface RasberryService {
 	
 	public List<RasberryVO> readRasberryList(RasberryVO vo) throws Exception;
+	public RasberryVO readRasberryInfo() throws Exception;
 	
 }

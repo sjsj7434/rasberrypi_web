@@ -16,5 +16,10 @@ public class RasberryServiceImpl implements RasberryService {
 	public List<RasberryVO> readRasberryList(RasberryVO vo) throws Exception{
 		return memberDAO.readList(vo);
 	}
+
+	@Override
+	public RasberryVO readRasberryInfo() throws Exception {
+		return memberDAO.readInfo();
+	}
 	
 }

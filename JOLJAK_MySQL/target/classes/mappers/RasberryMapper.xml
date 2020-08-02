@@ -12,6 +12,12 @@
 			AND serialnumber = #{serialnumber}
 		ORDER BY time DESC
 	</select>
+	
+	<select id="selectForInfo" resultType="com.lsj.domain.RasberryVO">
+		SELECT * FROM temp_hud
+		ORDER BY time DESC
+		LIMIT 1
+	</select>
     
     <select id="login" resultType="com.lsj.domain.RasberryloginVO">
 		SELECT serialnumber, passwd
