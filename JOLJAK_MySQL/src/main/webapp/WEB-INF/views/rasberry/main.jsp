@@ -24,6 +24,10 @@
 	<!-- Bootstrap core JavaScript-->
 	<script src="vendor/jquery/jquery.min.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+	<!-- Bootstrap toggle -->
+	<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
 	<!-- Core plugin JavaScript-->
 	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -115,7 +119,9 @@
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">날짜 설정</div>
 											<div class="h5 mb-0 font-weight-bold text-gray-800">
 												<!-- datePicker -->
-												<form action="mainDatePicker" name="dateForm" method="post">
+												<form action="mainDatePicker" name="dateForm" id="dateForm" method="post">
+													<input type="hidden" id="autoOnoff" name="autoOnoff">
+													<input type="hidden" id="manualOnoff" name="manualOnoff">
 													<div>
 														<input type="text" id="datePicker" name="datePicker" style="width: 140px; font-size: 15px;" value="${datePicker}">
 													</div>
@@ -169,7 +175,92 @@
 											</c:choose>
 										</div>
 										<div class="col-auto">
-											<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+											<i style="display: block;"  id="autoToggleHead">
+												<input type="checkbox" name="autoToggle" id="autoToggle" onchange="autoToggleButton()" data-on="자동 모드" data-off="수동 모드" checked data-toggle="toggle" data-width="150">
+											</i>
+											<i style="display: none;" id="manualToggleHead" onclick="manualToggleButton()">
+												<input type="checkbox" name="manualToggle" id="manualToggle" data-on="켜짐" data-off="꺼짐" type="checkbox" checked data-toggle="toggle" data-width="150">
+											</i>
+											<script type="text/javascript">
+												function autoToggleButton(){
+													if(${onOffVO.autoOnoff == 1}){
+														console.log('autoOnoff : '+onOffVO.autoOnoff);
+														console.log('manualOnoff : '+onOffVO.manualOnoff);
+													}
+													
+													if($("input:checkbox[name=autoToggle]").is(":checked") == true) {
+														document.getElementById('autoOnoff').value = 1;
+														document.getElementById('manualToggleHead').style.display = 'none';
+
+														if(${jsonList[0].isOn > 0}){
+															$('#manualToggle').bootstrapToggle('on');
+															document.getElementById('manualOnoff').value = 1;
+														}
+														else{
+															$('#manualToggle').bootstrapToggle('off');
+															document.getElementById('manualOnoff').value = 0;
+														}
+													}
+													else{
+														document.getElementById('autoOnoff').value = 0;
+														document.getElementById('manualToggleHead').style.display = 'block';
+
+														if($("input:checkbox[name=manualToggle]").is(":checked") == true){
+															$('#manualToggle').bootstrapToggle('on');
+															document.getElementById('manualOnoff').value = 0;
+														}
+														else{
+															$('#manualToggle').bootstrapToggle('off');
+															document.getElementById('manualOnoff').value = 1;
+														}
+													}
+
+													var form = $("#dateForm").serialize();
+													$.ajax({
+														url:"infoSet",
+														type:"POST",
+														data:form,
+														success:function(data){
+															console.log(data);
+														},
+														error:function(error){
+															console.log(error);
+														}
+													});
+												}
+												function manualToggleButton(){
+													if($("input:checkbox[name=autoToggle]").is(":checked") == true) {
+														document.getElementById('autoOnoff').value = 1;
+														document.getElementById('manualToggleHead').style.display = 'none';
+													}
+													else{
+														document.getElementById('autoOnoff').value = 0;
+														document.getElementById('manualToggleHead').style.display = 'block';
+													}
+
+													if($("input:checkbox[name=manualToggle]").is(":checked") == true){
+														$('#manualToggle').bootstrapToggle('on');
+														document.getElementById('manualOnoff').value = 0;
+													}
+													else{
+														$('#manualToggle').bootstrapToggle('off');
+														document.getElementById('manualOnoff').value = 1;
+													}
+													
+													var form = $("#dateForm").serialize();
+													$.ajax({
+														url:"infoSet",
+														type:"POST",
+														data:form,
+														success:function(data){
+															console.log(data);
+														},
+														error:function(error){
+															console.log(error);
+														}
+													});
+												}
+											</script>
 										</div>
 									</div>
 								</div>

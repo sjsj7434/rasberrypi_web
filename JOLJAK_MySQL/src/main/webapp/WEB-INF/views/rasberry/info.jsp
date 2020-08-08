@@ -15,7 +15,9 @@
 	<div id="wrapper">
 		<h1>INFO PAGE</h1>
 		<br>
-		<span class="onoff">${info}</span>
+		<span class="autoOnoff">${autoOnoff}</span>
+		<br>
+		<span class="manualOnoff">${manualOnoff}</span>
 	</div>
 </body>
 </html>

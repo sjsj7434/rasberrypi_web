@@ -23,7 +23,30 @@
 		SELECT serialnumber, passwd
 		FROM rasberry
 		WHERE serialnumber = #{serialnumber}
-			AND passwd = #{passwd}
+		AND passwd = #{passwd}
+	</select>
+	
+	<insert id="updateOnoff">
+		UPDATE hw_on_off_log
+		SET
+			serialnumber = #{serialnumber},
+			manualOnoff = #{manualOnoff},
+			autoOnoff = #{autoOnoff},
+			time = #{time}
+		WHERE
+			serialnumber = #{serialnumber}
+	</insert>
+	
+	<select id="selectOnoff" resultType="com.lsj.domain.RasberryVO">
+		SELECT 
+			serialnumber,
+		    manualOnoff,
+		    autoOnoff,
+		    time
+		FROM
+			hw_on_off_log
+		WHERE
+			serialnumber = #{serialnumber}
 	</select>
 	
 </mapper>  
