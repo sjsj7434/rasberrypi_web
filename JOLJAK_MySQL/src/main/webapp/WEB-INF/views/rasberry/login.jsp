@@ -46,11 +46,11 @@
 									</div>
 									<form class="user" name='loginForm' method="post" action="login">
 										<div class="form-group">
-											<input class="form-control form-control-user" type="text" id="serialnumber" name="serialnumber" placeholder="ID">
+											<input class="form-control form-control-user" type="text" id="serialnumber" name="serialnumber" placeholder="ID" value="testserial">
 										</div>
 										
 										<div class="form-group">
-											<input class="form-control form-control-user" type="password" id="passwd" name="passwd" placeholder="Password">
+											<input class="form-control form-control-user" type="password" id="passwd" name="passwd" placeholder="Password" value="testserial">
 										</div>
 										
 										<hr>

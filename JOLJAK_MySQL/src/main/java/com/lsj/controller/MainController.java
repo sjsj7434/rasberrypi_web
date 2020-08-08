@@ -134,15 +134,10 @@ public class MainController {
 	        	discomfortRate = d;
 	        }
 	        
-			/*
-			 * vo.setSerialnumber("testSerial"); RasberryVO onOffVO =
-			 * rasberryService.selectOnoff(vo);
-			 * 
-			 * System.out.println(onOffVO.getSerialnumber());
-			 * System.out.println(onOffVO.getAutoOnoff());
-			 * System.out.println(onOffVO.getManualOnoff()); model.addAttribute("onOffVO",
-			 * onOffVO);
-			 */
+        	vo.setSerialnumber("testserial");
+	        RasberryVO onOffVO = rasberryService.selectOnoff(vo);
+
+	        model.addAttribute("onOffVO", onOffVO);
 	        model.addAttribute("discomfortRate", discomfortRate);
 	        model.addAttribute("jsonList", jsonArray);
 	        model.addAttribute("datePicker", vo.getDatePicker());
@@ -193,6 +188,10 @@ public class MainController {
 	        	discomfortRate = d;
 	        }
 
+	        vo.setSerialnumber("testserial");
+	        RasberryVO onOffVO = rasberryService.selectOnoff(vo);
+
+	        model.addAttribute("onOffVO", onOffVO);
 	        model.addAttribute("discomfortRate", discomfortRate);
 	        model.addAttribute("jsonList", jsonArray);
 	        model.addAttribute("datePicker", vo.getDatePicker());
