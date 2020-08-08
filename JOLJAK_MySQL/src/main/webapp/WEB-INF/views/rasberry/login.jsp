@@ -11,7 +11,8 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
-	<title>온습도 - Login</title>
+	<title>온습도 관리 - Login</title>
+	<link href="resources/img/undraw_posting_photo.svg" rel="shortcut icon">
 	
 	<!-- Custom fonts for this template-->
 	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
