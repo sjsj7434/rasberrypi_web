@@ -27,5 +27,15 @@ public class RasberryDAOImpl implements RasberryDAO {
 	public RasberryVO readInfo() throws Exception {
 		return sqlSession.selectOne(namespace + "selectForInfo");
 	}
+
+	@Override
+	public void updateOnoff(RasberryVO vo) throws Exception {
+		sqlSession.update(namespace + "updateOnoff", vo);
+	}
+
+	@Override
+	public RasberryVO selectOnoff(RasberryVO vo) throws Exception {
+		return sqlSession.selectOne(namespace + "selectOnoff");
+	}
 	
 }

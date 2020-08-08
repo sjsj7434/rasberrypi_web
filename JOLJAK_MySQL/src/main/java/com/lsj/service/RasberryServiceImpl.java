@@ -21,5 +21,15 @@ public class RasberryServiceImpl implements RasberryService {
 	public RasberryVO readRasberryInfo() throws Exception {
 		return memberDAO.readInfo();
 	}
+
+	@Override
+	public void updateOnoff(RasberryVO vo) throws Exception {
+		memberDAO.updateOnoff(vo);
+	}
+
+	@Override
+	public RasberryVO selectOnoff(RasberryVO vo) throws Exception {
+		return memberDAO.selectOnoff(vo);
+	}
 	
 }

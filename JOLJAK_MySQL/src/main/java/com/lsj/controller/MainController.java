@@ -1,5 +1,6 @@
 package com.lsj.controller;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.lsj.domain.RasberryVO;
@@ -46,14 +48,19 @@ public class MainController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value = "info", method = RequestMethod.GET)
-	public String crawling(Model model) throws Exception{
+	@RequestMapping(value = "infoSet", method = RequestMethod.POST)
+	@ResponseBody
+	public String crawlingSet(HttpServletRequest request, RasberryVO vo) throws Exception{
+		int autoOnoff = Integer.parseInt(request.getParameter("autoOnoff"));
+		int manualOnoff = Integer.parseInt(request.getParameter("manualOnoff"));
 		
-		RasberryVO info = rasberryService.readRasberryInfo();
+		long startTime = System.currentTimeMillis();    
+		Timestamp time = new Timestamp(startTime);
+		vo.setTime(time);
+		vo.setSerialnumber("testSerial");
+		rasberryService.updateOnoff(vo);
 		
-		model.addAttribute("info", info.getIsOn());
-		
-		return "rasberry/info";
+		return "rasberry/auto:"+autoOnoff+"/manual:"+manualOnoff;
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -93,7 +100,7 @@ public class MainController {
 			String timeNow = format.format(time);
 			
 			vo.setDatePicker(timeNow);
-			vo.setSerialNumber(loginVO.getSerialnumber());
+			vo.setSerialnumber(loginVO.getSerialnumber());
 			
 			List<RasberryVO> temp = rasberryService.readRasberryList(vo);
 	    	
@@ -105,7 +112,7 @@ public class MainController {
 				jsonObject.put("hud_in", temp.get(i).getHud_in());
 				jsonObject.put("temp_out", temp.get(i).getTemp_out());
 				jsonObject.put("hud_out", temp.get(i).getHud_out());
-				jsonObject.put("id", temp.get(i).getSerialNumber());
+				jsonObject.put("id", temp.get(i).getSerialnumber());
 				jsonObject.put("time", temp.get(i).getTime());
 				jsonObject.put("isOn", temp.get(i).getIsOn());
 				
@@ -126,7 +133,16 @@ public class MainController {
 		        
 	        	discomfortRate = d;
 	        }
-
+	        
+			/*
+			 * vo.setSerialnumber("testSerial"); RasberryVO onOffVO =
+			 * rasberryService.selectOnoff(vo);
+			 * 
+			 * System.out.println(onOffVO.getSerialnumber());
+			 * System.out.println(onOffVO.getAutoOnoff());
+			 * System.out.println(onOffVO.getManualOnoff()); model.addAttribute("onOffVO",
+			 * onOffVO);
+			 */
 	        model.addAttribute("discomfortRate", discomfortRate);
 	        model.addAttribute("jsonList", jsonArray);
 	        model.addAttribute("datePicker", vo.getDatePicker());
@@ -144,7 +160,7 @@ public class MainController {
 			 return "redirect:/";
 		}
 		else {
-			vo.setSerialNumber(loginVO.getSerialnumber());
+			vo.setSerialnumber(loginVO.getSerialnumber());
 			List<RasberryVO> temp = rasberryService.readRasberryList(vo);
 	    	
 	        JSONArray jsonArray = new JSONArray();
@@ -155,7 +171,7 @@ public class MainController {
 				jsonObject.put("hud_in", temp.get(i).getHud_in());
 				jsonObject.put("temp_out", temp.get(i).getTemp_out());
 				jsonObject.put("hud_out", temp.get(i).getHud_out());
-				jsonObject.put("id", temp.get(i).getSerialNumber());
+				jsonObject.put("id", temp.get(i).getSerialnumber());
 				jsonObject.put("time", temp.get(i).getTime());
 				jsonObject.put("isOn", temp.get(i).getIsOn());
 				

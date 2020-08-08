@@ -12,6 +12,32 @@ public class RasberryVO {
 	private Timestamp time;
 	private int isOn;
 	private String datePicker;
+	private int autoOnoff;
+	private int manualOnoff;
+
+	public String getSerialnumber() {
+		return serialnumber;
+	}
+
+	public void setSerialnumber(String serialnumber) {
+		this.serialnumber = serialnumber;
+	}
+
+	public int getAutoOnoff() {
+		return autoOnoff;
+	}
+
+	public void setAutoOnoff(int autoOnoff) {
+		this.autoOnoff = autoOnoff;
+	}
+
+	public int getManualOnoff() {
+		return manualOnoff;
+	}
+
+	public void setManualOnoff(int manualOnoff) {
+		this.manualOnoff = manualOnoff;
+	}
 
 	public float getTemp_in() {
 		return temp_in;
@@ -43,14 +69,6 @@ public class RasberryVO {
 
 	public void setHud_out(float hud_out) {
 		this.hud_out = hud_out;
-	}
-
-	public String getSerialNumber() {
-		return serialnumber;
-	}
-
-	public void setSerialNumber(String serialnumber) {
-		this.serialnumber = serialnumber;
 	}
 
 	public Timestamp getTime() {
