@@ -83,6 +83,7 @@
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
 						<li>
+							${loginVO.serialnumber}님 안녕하세요
 							<script type="text/javascript">
 								function logoutButton() {
 									location.href="logout";

@@ -51,13 +51,16 @@ public class MainController {
 	@RequestMapping(value = "infoSet", method = RequestMethod.POST)
 	@ResponseBody
 	public String crawlingSet(HttpServletRequest request, RasberryVO vo) throws Exception{
+		HttpSession session = request.getSession();
+		RasberryloginVO loginVO = (RasberryloginVO) session.getAttribute("member");
+		
 		int autoOnoff = Integer.parseInt(request.getParameter("autoOnoff"));
 		int manualOnoff = Integer.parseInt(request.getParameter("manualOnoff"));
 		
 		long startTime = System.currentTimeMillis();    
 		Timestamp time = new Timestamp(startTime);
 		vo.setTime(time);
-		vo.setSerialnumber("testSerial");
+		vo.setSerialnumber(loginVO.getSerialnumber());
 		rasberryService.updateOnoff(vo);
 		
 		return "rasberry/auto:"+autoOnoff+"/manual:"+manualOnoff;
@@ -134,9 +137,10 @@ public class MainController {
 	        	discomfortRate = d;
 	        }
 	        
-        	vo.setSerialnumber("testserial");
+        	vo.setSerialnumber(loginVO.getSerialnumber());
 	        RasberryVO onOffVO = rasberryService.selectOnoff(vo);
-
+	        
+	        model.addAttribute("loginVO", loginVO);
 	        model.addAttribute("onOffVO", onOffVO);
 	        model.addAttribute("discomfortRate", discomfortRate);
 	        model.addAttribute("jsonList", jsonArray);
@@ -188,9 +192,10 @@ public class MainController {
 	        	discomfortRate = d;
 	        }
 
-	        vo.setSerialnumber("testserial");
+	        vo.setSerialnumber(loginVO.getSerialnumber());
 	        RasberryVO onOffVO = rasberryService.selectOnoff(vo);
 
+	        model.addAttribute("loginVO", loginVO);
 	        model.addAttribute("onOffVO", onOffVO);
 	        model.addAttribute("discomfortRate", discomfortRate);
 	        model.addAttribute("jsonList", jsonArray);
