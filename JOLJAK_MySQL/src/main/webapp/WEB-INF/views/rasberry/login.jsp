@@ -11,7 +11,8 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
-	<title>온습도 - Login</title>
+	<title>온습도 관리 - Login</title>
+	<link href="resources/img/undraw_posting_photo.svg" rel="shortcut icon">
 	
 	<!-- Custom fonts for this template-->
 	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -46,11 +47,11 @@
 									</div>
 									<form class="user" name='loginForm' method="post" action="login">
 										<div class="form-group">
-											<input class="form-control form-control-user" type="text" id="serialnumber" name="serialnumber" placeholder="ID">
+											<input class="form-control form-control-user" type="text" id="serialnumber" name="serialnumber" placeholder="ID" value="testserial">
 										</div>
 										
 										<div class="form-group">
-											<input class="form-control form-control-user" type="password" id="passwd" name="passwd" placeholder="Password">
+											<input class="form-control form-control-user" type="password" id="passwd" name="passwd" placeholder="Password" value="testserial">
 										</div>
 										
 										<hr>

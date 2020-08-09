@@ -12,7 +12,8 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
-	<title>온습도 - Main</title>
+	<title>온습도 관리 - Main</title>
+	<link href="resources/img/undraw_posting_photo.svg" rel="shortcut icon">
 	
 	<!-- Custom fonts for this template-->
 	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -120,8 +121,8 @@
 											<div class="h5 mb-0 font-weight-bold text-gray-800">
 												<!-- datePicker -->
 												<form action="mainDatePicker" name="dateForm" id="dateForm" method="post">
-													<input type="hidden" id="autoOnoff" name="autoOnoff">
-													<input type="hidden" id="manualOnoff" name="manualOnoff">
+													<input type="hidden" id="autoOnoff" name="autoOnoff" value="0">
+													<input type="hidden" id="manualOnoff" name="manualOnoff" value="0">
 													<div>
 														<input type="text" id="datePicker" name="datePicker" style="width: 140px; font-size: 15px;" value="${datePicker}">
 													</div>
@@ -166,53 +167,90 @@
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-success text-uppercase mb-1">작동상태</div>
 											<c:choose>
-												<c:when test="${jsonList[0].isOn > 0}">
-													<div class="h5 mb-0 font-weight-bold text-gray-800">켜짐(ON)</div>												
+												<c:when test="${onOffVO.autoOnoff == 1}">
+													<c:choose>
+														<c:when test="${jsonList[0].isOn == 1}">
+															<div id="hardwareStatus" class="h5 mb-0 font-weight-bold text-gray-800">켜짐(ON)</div>												
+														</c:when>
+														<c:when test="${jsonList[0].isOn == 0}">
+															<div id="hardwareStatus" class="h5 mb-0 font-weight-bold text-gray-800">꺼짐(OFF)</div>												
+														</c:when>
+														<c:otherwise>
+															<div id="hardwareStatus" class="h5 mb-0 font-weight-bold text-gray-800">꺼짐(OFF)</div>
+															<!-- <div id="hardwareStatus" class="h5 mb-0 font-weight-bold text-gray-800">데이터 없음</div> -->
+														</c:otherwise>
+													</c:choose>
 												</c:when>
-												<c:otherwise>
-													<div class="h5 mb-0 font-weight-bold text-gray-800">꺼짐(OFF)</div>
-												</c:otherwise>
+												<c:when test="${onOffVO.autoOnoff == 0}">
+													<c:choose>
+														<c:when test="${onOffVO.manualOnoff == 1}">
+															<div id="hardwareStatus" class="h5 mb-0 font-weight-bold text-gray-800">켜짐(ON)</div>
+														</c:when>
+														<c:when test="${onOffVO.manualOnoff == 0}">
+															<div id="hardwareStatus" class="h5 mb-0 font-weight-bold text-gray-800">꺼짐(OFF)</div>
+														</c:when>
+													</c:choose>
+												</c:when>
 											</c:choose>
 										</div>
 										<div class="col-auto">
-											<i style="display: block;"  id="autoToggleHead">
-												<input type="checkbox" name="autoToggle" id="autoToggle" onchange="autoToggleButton()" data-on="자동 모드" data-off="수동 모드" checked data-toggle="toggle" data-width="150">
-											</i>
-											<i style="display: none;" id="manualToggleHead" onclick="manualToggleButton()">
-												<input type="checkbox" name="manualToggle" id="manualToggle" data-on="켜짐" data-off="꺼짐" type="checkbox" checked data-toggle="toggle" data-width="150">
-											</i>
+											<c:choose>
+												<c:when test="${onOffVO.autoOnoff == 1}">
+													<i style="display: block;" id="autoToggleHead">
+														<input type="checkbox" name="autoToggle" id="autoToggle" onchange="autoToggleButton()" data-on="자동 모드" data-off="수동 모드" data-toggle="toggle" data-width="150" checked>
+													</i>
+													<i style="display: none;" id="manualToggleHead" onclick="manualToggleButton()">
+														<input type="checkbox" name="manualToggle" id="manualToggle" data-on="전원 켜짐" data-off="전원 꺼짐" data-toggle="toggle" data-width="150">
+													</i>
+												</c:when>
+												<c:when test="${onOffVO.autoOnoff == 0}">
+													<i style="display: block;" id="autoToggleHead">
+														<input type="checkbox" name="autoToggle" id="autoToggle" onchange="autoToggleButton()" data-on="자동 모드" data-off="수동 모드" data-toggle="toggle" data-width="150">
+													</i>
+													<c:choose>
+														<c:when test="${onOffVO.manualOnoff == 1}">
+															<i style="display: block;" id="manualToggleHead" onclick="manualToggleButton()">
+																<input type="checkbox" name="manualToggle" id="manualToggle" data-on="전원 켜짐" data-off="전원 꺼짐" data-toggle="toggle" data-width="150"checked>
+															</i>
+														</c:when>
+														<c:when test="${onOffVO.manualOnoff == 0}">
+															<i style="display: block;" id="manualToggleHead" onclick="manualToggleButton()">
+																<input type="checkbox" name="manualToggle" id="manualToggle" data-on="전원 켜짐" data-off="전원 꺼짐" data-toggle="toggle" data-width="150">
+															</i>
+														</c:when>
+													</c:choose>
+												</c:when>
+											</c:choose>
 											<script type="text/javascript">
 												function autoToggleButton(){
-													if(${onOffVO.autoOnoff == 1}){
-														console.log('autoOnoff : '+onOffVO.autoOnoff);
-														console.log('manualOnoff : '+onOffVO.manualOnoff);
-													}
-													
 													if($("input:checkbox[name=autoToggle]").is(":checked") == true) {
 														document.getElementById('autoOnoff').value = 1;
+														
 														document.getElementById('manualToggleHead').style.display = 'none';
-
-														if(${jsonList[0].isOn > 0}){
-															$('#manualToggle').bootstrapToggle('on');
-															document.getElementById('manualOnoff').value = 1;
+														document.getElementById('manualOnoff').value = 0;
+														$('#manualToggle').bootstrapToggle('off');
+														
+														if(${jsonList[0].isOn == 1}){
+															var html = "<div id='hardwareStatus' class='h5 mb-0 font-weight-bold text-gray-800'>켜짐(ON)</div>";
+															$("#hardwareStatus").empty();
+															$("#hardwareStatus").append(html);
 														}
 														else{
-															$('#manualToggle').bootstrapToggle('off');
-															document.getElementById('manualOnoff').value = 0;
+															var html = "<div id='hardwareStatus' class='h5 mb-0 font-weight-bold text-gray-800'>꺼짐(OFF)</div>";
+															$("#hardwareStatus").empty();
+															$("#hardwareStatus").append(html);
 														}
 													}
 													else{
 														document.getElementById('autoOnoff').value = 0;
+														
 														document.getElementById('manualToggleHead').style.display = 'block';
-
-														if($("input:checkbox[name=manualToggle]").is(":checked") == true){
-															$('#manualToggle').bootstrapToggle('on');
-															document.getElementById('manualOnoff').value = 0;
-														}
-														else{
-															$('#manualToggle').bootstrapToggle('off');
-															document.getElementById('manualOnoff').value = 1;
-														}
+														document.getElementById('manualOnoff').value = 0;
+														$('#manualToggle').bootstrapToggle('off');
+														
+														var html = "<div id='hardwareStatus' class='h5 mb-0 font-weight-bold text-gray-800'>꺼짐(OFF)</div>";
+														$("#hardwareStatus").empty();
+														$("#hardwareStatus").append(html);
 													}
 
 													var form = $("#dateForm").serialize();
@@ -228,23 +266,22 @@
 														}
 													});
 												}
+												
 												function manualToggleButton(){
-													if($("input:checkbox[name=autoToggle]").is(":checked") == true) {
-														document.getElementById('autoOnoff').value = 1;
-														document.getElementById('manualToggleHead').style.display = 'none';
-													}
-													else{
-														document.getElementById('autoOnoff').value = 0;
-														document.getElementById('manualToggleHead').style.display = 'block';
-													}
-
 													if($("input:checkbox[name=manualToggle]").is(":checked") == true){
-														$('#manualToggle').bootstrapToggle('on');
 														document.getElementById('manualOnoff').value = 0;
+														
+														var html = "<div id='hardwareStatus' class='h5 mb-0 font-weight-bold text-gray-800'>꺼짐(OFF)</div>";
+														$("#hardwareStatus").empty();
+														$("#hardwareStatus").append(html);
 													}
 													else{
-														$('#manualToggle').bootstrapToggle('off');
+														//$('#manualToggle').bootstrapToggle('off');
 														document.getElementById('manualOnoff').value = 1;
+														
+														var html = "<div id='hardwareStatus' class='h5 mb-0 font-weight-bold text-gray-800'>켜짐(ON)</div>";
+														$("#hardwareStatus").empty();
+														$("#hardwareStatus").append(html);
 													}
 													
 													var form = $("#dateForm").serialize();
