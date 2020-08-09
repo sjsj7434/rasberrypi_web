@@ -10,5 +10,6 @@ public interface RasberryDAO {
 	public RasberryVO readInfo() throws Exception;
 	public void updateOnoff(RasberryVO vo) throws Exception;
 	public RasberryVO selectOnoff(RasberryVO vo) throws Exception;
+	public void insertOnoff(String serialnumber) throws Exception;
 	
 }

@@ -26,7 +26,16 @@
 		AND passwd = #{passwd}
 	</select>
 	
-	<insert id="updateOnoff">
+	<insert id="insertOnoff">
+		INSERT INTO hw_on_off_log(
+			serialnumber
+		)
+		VALUES(
+			#{serialnumber}
+		)
+	</insert>
+	
+	<update id="updateOnoff">
 		UPDATE hw_on_off_log
 		SET
 			serialnumber = #{serialnumber},
@@ -35,7 +44,7 @@
 			time = #{time}
 		WHERE
 			serialnumber = #{serialnumber}
-	</insert>
+	</update>
 	
 	<select id="selectOnoff" resultType="com.lsj.domain.RasberryVO">
 		SELECT 

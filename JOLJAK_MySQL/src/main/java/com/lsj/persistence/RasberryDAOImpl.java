@@ -37,5 +37,10 @@ public class RasberryDAOImpl implements RasberryDAO {
 	public RasberryVO selectOnoff(RasberryVO vo) throws Exception {
 		return sqlSession.selectOne(namespace + "selectOnoff", vo);
 	}
+
+	@Override
+	public void insertOnoff(String serialnumber) throws Exception {
+		sqlSession.insert(namespace + "insertOnoff", serialnumber);
+	}
 	
 }

@@ -43,15 +43,15 @@
 							<div class="col-lg-6">
 								<div class="p-5">
 									<div class="text-center">
-										<h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+										<h1 class="h1 text-gray-900 mb-4">LOGIN</h1>
 									</div>
 									<form class="user" name='loginForm' method="post" action="login">
 										<div class="form-group">
-											<input class="form-control form-control-user" type="text" id="serialnumber" name="serialnumber" placeholder="ID" value="testserial">
+											<input class="form-control form-control-user" type="text" id="serialnumber" name="serialnumber" placeholder="Serial number" value="">
 										</div>
 										
 										<div class="form-group">
-											<input class="form-control form-control-user" type="password" id="passwd" name="passwd" placeholder="Password" value="testserial">
+											<input class="form-control form-control-user" type="password" id="passwd" name="passwd" placeholder="Password" value="">
 										</div>
 										
 										<hr>
@@ -60,7 +60,9 @@
 											<p style="color: red;">로그인 실패! 아이디와 비밀번호 확인해주세요.</p>
 										</c:if>
 										
-										<a href="#" onclick="loginSubmit()" class="btn btn-primary btn-user btn-block"> Login </a>
+											<a href="#" onclick="loginSubmit()" class="btn btn-primary btn-user btn-block"> LOGIN </a>
+										<hr>
+											<a href="register" class="btn btn-google btn-user btn-block"> 제품 등록 </a>
 										
 										<script type="text/javascript">
 											function loginSubmit() {

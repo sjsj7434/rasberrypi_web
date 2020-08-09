@@ -10,5 +10,6 @@ public interface RasberryService {
 	public RasberryVO readRasberryInfo() throws Exception;
 	public void updateOnoff(RasberryVO vo) throws Exception;
 	public RasberryVO selectOnoff(RasberryVO vo) throws Exception;
+	public void insertOnoff(String serialnumber) throws Exception;
 	
 }

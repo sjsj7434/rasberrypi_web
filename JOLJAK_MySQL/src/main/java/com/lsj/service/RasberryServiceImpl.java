@@ -31,5 +31,10 @@ public class RasberryServiceImpl implements RasberryService {
 	public RasberryVO selectOnoff(RasberryVO vo) throws Exception {
 		return memberDAO.selectOnoff(vo);
 	}
+
+	@Override
+	public void insertOnoff(String serialnumber) throws Exception {
+		memberDAO.insertOnoff(serialnumber);
+	}
 	
 }

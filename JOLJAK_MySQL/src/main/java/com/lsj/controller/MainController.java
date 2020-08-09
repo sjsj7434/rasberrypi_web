@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,6 +36,38 @@ public class MainController {
 	
 	@Autowired
 	private RasberryloginService rasberryloginService;
+	
+	@RequestMapping(value = {"/register"}, method = RequestMethod.GET)
+    public String register(Model model) throws Exception {
+        return "rasberry/register";
+    }
+	
+	@RequestMapping(value = {"/registering"}, method = RequestMethod.POST)
+    public String registering(@RequestParam("passwd")String passwd, @RequestParam("serialnumber")String serialnumber, Model model) throws Exception {
+		RasberryVO vo = new RasberryVO();
+		RasberryloginVO loginVO = new RasberryloginVO();
+		
+		loginVO.setPasswd(passwd);
+		loginVO.setSerialnumber(serialnumber);
+		vo.setSerialnumber(serialnumber);
+
+		if(rasberryService.selectOnoff(vo) == null) {
+			RasberryloginVO login = rasberryloginService.login(loginVO);
+			
+			if(login == null) {
+				model.addAttribute("msg", "등록 실패하였습니다");
+				return "rasberry/register";
+			}
+			else {
+				rasberryService.insertOnoff(serialnumber);
+				return "rasberry/login";
+			}
+		}
+		else {
+			model.addAttribute("msg", "이미 등록되었습니다");
+			return "rasberry/register";
+		}
+    }
 	
 	@RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public String login2(Model model) throws Exception {
@@ -72,10 +105,7 @@ public class MainController {
 	}
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(RasberryloginVO vo, HttpServletRequest req, RedirectAttributes rttr) throws Exception{
-		System.out.println("login--------------------");
-		
 		HttpSession session = req.getSession();
-		System.out.println(rasberryloginService.login(vo));
 		RasberryloginVO login = rasberryloginService.login(vo);
 		
 		if(login == null) {
