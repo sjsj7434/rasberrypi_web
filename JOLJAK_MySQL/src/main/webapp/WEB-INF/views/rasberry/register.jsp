@@ -62,6 +62,7 @@
 								</c:if>
 								
 								<a href="#" onclick="registerSubmit()" class="btn btn-primary btn-user btn-block"> 제품 등록 </a>
+								
 								<script type="text/javascript">
 									function registerSubmit() {
 										if($('#serialnumber').val() == ''){
@@ -78,6 +79,8 @@
 									}
 								</script>
 							</form>
+							
+							<a href="login" class="btn btn-primary btn-user btn-block"> 로그인으로... </a>
 							
 							<div style="padding-bottom: 150px;"></div>
 						</div>
